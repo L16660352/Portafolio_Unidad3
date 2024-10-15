@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra, Papel o Tijera</title>
+    <style>
+        /* Aquí puedes agregar tus estilos CSS */
+    </style>
+</head>
+<body>
+    <h1>¡Piedra, Papel o Tijera!</h1>
+    <button onclick="jugar('piedra')">Piedra</button>
+    <button onclick="jugar('papel')">Papel</button>
+    <button onclick="jugar('tijera')">Tijera</button>
+    <p id="resultado"></p>
+
+    <script>
+        function jugar(opcionUsuario) {
+            // Opciones posibles
+            const opciones = ['piedra', 'papel', 'tijera'];
+
+            // Opción aleatoria de la computadora
+            const opcionComputadora = opciones[Math.floor(Math.random() * opciones.length)];
+
+            // Determinar el ganador
+            let resultado;
+            if (opcionUsuario === opcionComputadora) {
+                resultado = "Empate!";
+            } else if (
+                (opcionUsuario === 'piedra' && opcionComputadora === 'tijera') ||
+                (opcionUsuario === 'papel' && opcionComputadora === 'piedra') ||
+                (opcionUsuario === 'tijera' && opcionComputadora === 'papel')
+            ) {
+                resultado = "¡Ganaste!";
+            } else {
+                resultado = "¡Perdiste!";
+            }
+
+            // Mostrar el resultado en la página
+            document.getElementById('resultado').textContent = `Tú elegiste: ${opcionUsuario}. La computadora eligió: ${opcionComputadora}. ${resultado}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Galería de Imágenes con Unsplash API</title>
+    <style>
+        .gallery-image {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="agregarImagen">Agregar Imagen</button>
+    <div id="galeria"></div>
+
+    <script>
+        const apiKey = 'qFzpmGNZBRXZlCtXv92WxtxzO1zYDTQNITZLRtmmE9U';
+        const galeria = document.getElementById('galeria');
+
+        function agregarImagen() {
+            const url = `https://api.unsplash.com/photos/random?client_id=${apiKey}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const imageUrl = data.urls.regular;
+                    const image = document.createElement('img');
+                    image.src = imageUrl;
+                    image.classList.add('gallery-image');
+                    galeria.appendChild(image);
+                })
+                .catch(error => {
+                    console.error('Error al obtener la imagen:', error);
+                });
+        }
+
+        document.getElementById('agregarImagen').addEventListener('click', agregarImagen);
+    </script>
+</body>
+</html>

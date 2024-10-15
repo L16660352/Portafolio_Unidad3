@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temporizador</title>
+</head>
+<body>
+    <p id="contador">00:00</p>
+    <button id="iniciar">Iniciar</button>
+    <button id="pausar">Pausar</button>
+    <button id="reiniciar">Reiniciar</button>
+
+    <script>
+        const contador = document.getElementById('contador');
+        const iniciarBtn = document.getElementById('iniciar');
+        const pausarBtn = document.getElementById('pausar');
+        const reiniciarBtn = document.getElementById('reiniciar');
+
+        let segundos = 0;
+        let minutos = 0;
+        let intervalo;
+
+        function actualizarContador() {
+            segundos++;
+            if (segundos === 60) {
+                segundos = 0;
+                minutos++;
+            }
+            const segundosStr = segundos < 10 ? '0' + segundos : segundos;
+            const minutosStr = minutos < 10 ? '0' + minutos : minutos;   
+
+            contador.textContent = `${minutosStr}:${segundosStr}`;
+        }
+
+        function iniciar() {
+            intervalo = setInterval(actualizarContador, 1000);
+            iniciarBtn.disabled = true;
+            pausarBtn.disabled = false;
+            reiniciarBtn.disabled = false;
+        }
+
+        function pausar() {
+            clearInterval(intervalo);
+            iniciarBtn.disabled = false;
+            pausarBtn.disabled = true;
+        }
+zzz
+        function reiniciar() {
+            clearInterval(intervalo);
+            segundos = 0;
+            minutos = 0;
+            contador.textContent = '00:00';
+            iniciarBtn.disabled = false;
+            pausarBtn.disabled = true;
+            reiniciarBtn.disabled = true;
+        }
+
+        iniciarBtn.addEventListener('click', iniciar);
+        pausarBtn.addEventListener('click', pausar);
+        reiniciarBtn.addEventListener('click', reiniciar);   
+
+    </script>
+</body>
+</html>

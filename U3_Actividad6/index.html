@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambio de imagen</title>
+</head>
+<body>
+  <button onclick="cambiarImagen()">Cambiar Imagen</button>
+  <script>
+    function cambiarImagen() {
+      const colores = ["red", "blue", "green", "yellow", "purple", "orange"]; 
+      const body = document.body;
+
+      let colorAleatorio;
+      for (let i = 0; i < 1; i++) {
+        const indiceAleatorio = Math.floor(Math.random() * colores.length);
+        colorAleatorio = colores[indiceAleatorio];
+      }
+
+      body.style.backgroundColor = colorAleatorio;
+    }
+  </script>
+</body>
+</html>

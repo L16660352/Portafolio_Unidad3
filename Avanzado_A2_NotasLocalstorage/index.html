@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bloc de Notas</title>
+    <style>
+        .note {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="nuevaNota" placeholder="Escribe una nota">
+    <button onclick="agregarNota()">Agregar</button>
+    <div id="notas"></div>
+
+    <script>
+        // Función para cargar las notas del Local Storage al cargar la página
+        function cargarNotas() {
+            const notasGuardadas = JSON.parse(localStorage.getItem('notas')) || [];
+            notasGuardadas.forEach(nota => {
+                crearNota(nota);
+            });
+        }
+
+        // Función para crear una nueva nota
+        function crearNota(texto) {
+            const nota = document.createElement('div');
+            nota.classList.add('note');
+            nota.textContent = texto;
+
+            const botonEliminar = document.createElement('button');
+            botonEliminar.textContent = 'Eliminar';
+            botonEliminar.onclick = () => {
+                nota.remove();
+                eliminarNota(texto);
+            };
+            nota.appendChild(botonEliminar);
+
+            document.getElementById('notas').appendChild(nota);
+        }
+
+        // Función para agregar una nueva nota
+        function agregarNota() {
+            const nuevaNota = document.getElementById('nuevaNota').value;
+            if (nuevaNota) {
+                crearNota(nuevaNota);
+                guardarNotas();
+                document.getElementById('nuevaNota').value = '';
+            }
+        }
+
+        // Función para guardar las notas en el Local Storage
+        function guardarNotas() {
+            const notas = document.querySelectorAll('.note');
+            const textosNotas = Array.from(notas).map(nota => nota.textContent);
+            localStorage.setItem('notas', JSON.stringify(textosNotas));
+        }
+
+        // Cargar las notas al iniciar la página
+        cargarNotas();
+    </script>
+</body>
+</html>
