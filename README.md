@@ -1,0 +1,7 @@
+- [ ] Dashboard
+    - [*] Menu (inicio, servicios, sobre mi, contacto)
+    - [*] Efecto tipo hamburgesa
+- [*] Galeria
+    - [*] Imagen
+    - [*] Redireccionar a actividad
+    - [ ] Acercamiento al pasar el mouse
