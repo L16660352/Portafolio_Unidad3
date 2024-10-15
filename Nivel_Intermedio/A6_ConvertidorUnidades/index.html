@@ -1,64 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Convertidor de Unidades</title>
+    <meta charset="UTF-8">
+    <title>Convertidor de Unidades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F8FF; /* Azul claro */
+            text-align: center;
+        }
+
+        .container {
+            background-color: #FFFFFF;
+            border: 1px solid #007BFF; /* Azul más intenso */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #007BFF;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+        }
+
+        p {
+            color: #007BFF;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Convertidor de Unidades</h1>
-  
-  <label for="inputUnit">Unidad de entrada:</label>
-  <select id="inputUnit" onchange="convertUnits()">
-    <option value="meters">Metros</option>
-    <option value="kilometers">Kilómetros</option>
-    <option value="miles">Millas</option>
-  </select>
-  
-  <input type="number" id="inputValue" oninput="convertUnits()">
-  
-  <label for="outputUnit">Unidad de salida:</label>
-  <select id="outputUnit" onchange="convertUnits()">
-    <option value="meters">Metros</option>
-    <option value="kilometers">Kilómetros</option>
-    <option value="miles">Millas</option>
-  </select>
-  
-  <p>Valor convertido: <span id="outputValue">0</span></p>
+    <div class="container">
+        <h1>Convertidor de Unidades</h1>
 
-  <script>
-    function convertUnits() {
-      var inputUnit = document.getElementById('inputUnit').value;
-      var outputUnit = document.getElementById('outputUnit').value;
-      var inputValue = parseFloat(document.getElementById('inputValue').value);
-      var outputValue;
-      
-      // Convert input to meters
-      switch(inputUnit) {
-        case 'meters':
-          outputValue = inputValue;
-          break;
-        case 'kilometers':
-          outputValue = inputValue * 1000;
-          break;
-        case 'miles':
-          outputValue = inputValue / 0.000621371;
-          break;
-      }
-      
-      // Convert meters to output unit
-      switch(outputUnit) {
-        case 'meters':
-          break;
-        case 'kilometers':
-          outputValue = outputValue / 1000;
-          break;
-        case 'miles':
-          outputValue = outputValue * 0.000621371;
-          break;
-      }
-      
-      document.getElementById('outputValue').innerText = outputValue;
-    }
-  </script>
+        <label for="inputUnit">Unidad de entrada:</label>
+        <select id="inputUnit" onchange="convertUnits()">
+            <option value="meters">Metros</option>
+            <option value="kilometers">Kilómetros</option>
+            <option value="miles">Millas</option>
+        </select>
+
+        <input type="number" id="inputValue" oninput="convertUnits()">
+
+        <label for="outputUnit">Unidad de salida:</label>
+        <select id="outputUnit" onchange="convertUnits()">
+            <option value="meters">Metros</option>
+            <option value="kilometers">Kilómetros</option>
+            <option value="miles">Millas</option>
+        </select>
+
+        <p>Valor convertido: <span id="outputValue">0</span></p>
+    </div>
+
+    <script>
+function convertUnits() {
+            const inputUnit = document.getElementById('inputUnit').value;
+            const outputUnit = document.getElementById('outputUnit').value;
+            const   
+ inputValue = parseFloat(document.getElementById('inputValue').value);
+
+            let result;
+
+            // Conversión a metros como unidad base
+            switch (inputUnit) {
+                case 'meters':
+                    result = inputValue;
+                    break;
+                case 'kilometers':
+                    result = inputValue * 1000;
+                    break;
+                case 'miles':
+                    result = inputValue * 1609.34; // 1 milla = 1609.34 metros
+                    break;
+                default:
+                    alert('Unidad de entrada no válida');
+                    return;
+            }
+
+            // Conversión de metros a la unidad de salida
+            switch (outputUnit) {
+                case 'meters':
+                    break;
+                case 'kilometers':
+                    result /= 1000;
+                    break;
+                case 'miles':
+                    result /= 1609.34;
+                    break;
+            }
+
+            document.getElementById('outputValue').textContent = result;
+        }    </script>
 </body>
 </html>

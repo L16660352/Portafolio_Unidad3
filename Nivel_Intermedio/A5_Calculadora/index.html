@@ -1,79 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Calculadora Básica</title>
-  <style>
-    /* Estilos CSS para la calculadora */
-    .calculator {
-      width: 250px;
-      margin: 0 auto;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-    .screen {
-      text-align: right;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    button {
-      padding: 15px;
-      font-size: 18px;
-    }
-  </style>
+    <title>Calculadora Básica</title>
+    <style>
+        .calculator {
+            width: 250px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #F0F8FF; /* Fondo azul claro */
+        }
+        .screen {
+            text-align: right;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #E0E0E0; /* Fondo gris claro */
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 15px;
+            font-size: 18px;
+            background-color: #007BFF; /* Azul */
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b2; /* Azul más oscuro al pasar el ratón */
+        }
+    </style>
 </head>
 <body>
-  <div class="calculator">
-    <input type="text" class="screen" id="result" readonly>
-    <div class="buttons">
-      <button onclick="clearResult()">C</button>
-      <button onclick="appendNumber('/')">/</button>
-      <button onclick="appendNumber('*')">*</button>
-      <button onclick="appendNumber('-')">-</button>
-      <button onclick="appendNumber('7')">7</button>
-      <button onclick="appendNumber('8')">8</button>
-      <button onclick="appendNumber('9')">9</button>
-      <button onclick="appendNumber('+')">+</button>
-      <button onclick="appendNumber('4')">4</button>
-      <button onclick="appendNumber('5')">5</button>
-      <button onclick="appendNumber('6')">6</button>
-      <button onclick="appendNumber('=')">=</button>
-      <button onclick="appendNumber('1')">1</button>
-      <button onclick="appendBreakdown('2')">2</button>
-      <button onclick="appendNumber('3')">3</button>
-      <button onclick="appendNumber('0')">0</button>
-      <button onclick="appendNumber('.')">.</button>
+    <div class="calculator">
+        <input type="text" class="screen" id="result" readonly>
+        <div class="buttons">
+            <button onclick="clearResult()">C</button>
+            <button onclick="appendOperator('/')">/</button>
+            <button onclick="appendOperator('*')">*</button>
+            <button onclick="appendOperator('-')">-</button>
+            <button onclick="appendNumber(7)">7</button>
+            <button onclick="appendNumber(8)">8</button>
+            <button onclick="appendNumber(9)">9</button>
+            <button onclick="appendOperator('+')">+</button>
+            <button onclick="appendNumber(4)">4</button>
+            <button onclick="appendNumber(5)">5</button>
+            <button onclick="appendNumber(6)">6</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendNumber(1)">1</button>
+            <button onclick="appendNumber(2)">2</button>
+            <button onclick="appendNumber(3)">3</button>
+            <button onclick="appendNumber(0)">0</button>
+            <button onclick="appendNumber('.')">.</button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // Variables para almacenar el número actual y el operador
-    let currentNumber = '';
-    let operator = '';
+    <script>
+        let currentNumber = '';
+        let operator = '';
+        let previousNumber = '';
 
-    // Función para agregar un número o operador a la pantalla
-    function appendNumber(number) {
-      currentNumber += number;
-      document.getElementById('result').value = currentNumber;
-    }
+        function appendNumber(number) {
+            currentNumber += number;
+            document.getElementById('result').value = currentNumber;
+        }
 
-    // Función para borrar la pantalla
-    function clearResult() {
-      currentNumber = '';
-      operator = '';
-      document.getElementById('result').value = '';
-    }
+        function appendOperator(op) {
+            if (currentNumber !== '') {
+                previousNumber = currentNumber;
+                currentNumber = '';
+                operator = op;
+            }
+        }
 
-    // Función para realizar el cálculo
-    function calculate() {
-      // Aquí se realiza el cálculo, utilizando el operador y los números almacenados
-      // ... (ver explicación detallada más abajo)
-    }
-  </script>
+        function clearResult() {
+            currentNumber = '';
+            operator = '';
+            previousNumber = '';
+            document.getElementById('result').value = '';
+        }
+
+        function calculate() {
+            if (operator && currentNumber !== '') {
+                let result;
+                switch (operator) {
+                    case '+':
+                        result = parseFloat(previousNumber) + parseFloat(currentNumber);
+                        break;
+                    case '-':
+                        result = parseFloat(previousNumber) - parseFloat(currentNumber);
+                        break;
+                    case '*':
+                        result = parseFloat(previousNumber) * parseFloat(currentNumber);
+                        break;
+                    case '/':
+                        result = parseFloat(previousNumber) / parseFloat(currentNumber);
+                        break;
+                }
+                currentNumber = result;
+                operator = '';
+                previousNumber = '';
+                document.getElementById('result').value = result;
+            }
+        }
+    </script>
 </body>
 </html>
