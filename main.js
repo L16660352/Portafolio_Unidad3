@@ -42,7 +42,7 @@ function index(){
 	cont.appendChild(title)
 	var act_ava = [
 		["imagen/galeria.jpg",	"./Nivel_Avanzado/A1_GaleriaUnsplash/index.html"],
-		["imagen/blocnotas.jpg", "./Nivelvel_Avanzado/A2_NotasLocalStorage/index.html"]
+		["imagen/blocnotas.jpg", "./Nivel_Avanzado/A2_NotasLocalStorage/index.html"]
 	]
 	
 	act_ava.forEach(function(item) {
@@ -53,6 +53,7 @@ function index(){
 
 function actividad( pic, act_loc){
 	var act = document.createElement("div")
+	act.classList.add('galeria_elem')
 	var a = document.createElement("a")
 	var img = document.createElement("img")
 	a.href = act_loc

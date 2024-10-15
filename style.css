@@ -42,24 +42,39 @@ a:visited {
 	#btn-menu {
 		display : none;
 	}
-  #menu {
-	  display : block !important;
-  }
+	#menu {
+		display : block !important;
+	}
+	img {
+		width : 30%;
+		height : 30%;
+		display : "inline-block";
+	}
+	img:hover {
+		width : 35%;
+	}
+	.galeria_elem{
+		display: inline-block;
+	}
+
 }
 
 @media (max-width: 800px) {
-  * {
-    font-size: 1.5rem;
-  }
-  .boton-menu {
-	  display : block;
-  }
+	* {
+		font-size: 1.5rem;
+	}
+	.boton-menu {
+		display : block;
+	}
+	img {
+		width : 90%;
+		display : "block";
+	}
+	img:hover {
+		width : 95%;
+	}
 }
 
 img {
-	width : 40%;
-}
-
-img:hover {
-	width : 50%;
+	padding : 3%;
 }
